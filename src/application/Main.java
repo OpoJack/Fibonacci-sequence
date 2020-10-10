@@ -10,6 +10,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 
 
 /* Name: Jack Oporto
@@ -39,36 +40,37 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 		
+		//Scene and HBox to put everything inside of
 		HBox root = new HBox();
-		Scene scene = new Scene(root, 600, 400);
+		Scene scene = new Scene(root, 500, 450);
 		
+		//X and Y values set
 		NumberAxis xAxis = new NumberAxis();
 		xAxis.setLabel("Fib index");
-		
 		NumberAxis yAxis = new NumberAxis();
 		yAxis.setLabel("Milliseconds to calculate ");
 		
+		//Linechart created
 		LineChart lineChart = new LineChart(xAxis, yAxis);
 		lineChart.setTitle("Recursive vs iterative: Fibonacci ");
 		
-		//XYChart.Series<String, Number> data = new XYChart.Series<>();
-		//data.setName("Fibonacci sequence");
-		
-		
+		//Seperate lines in the graph created
 		XYChart.Series series1 = new XYChart.Series();
 		series1.setName("Recursive");
-		
 		XYChart.Series series2 = new XYChart.Series();
 		series2.setName("Iterative");
 		
+		//This gets the data and puts it in the corrosponding chart
 		for(int i = 0; i<=40 ; i++) {
 			series1.getData().add(new XYChart.Data(i, getRecTime(i)));
 			series2.getData().add(new XYChart.Data(i, getIterTime(i)));
 		}
 		
+		//Adds content to the HBox
 		lineChart.getData().addAll(series1, series2);
 		root.getChildren().add(lineChart);
 		
+		//Adds HBox to the stage
 		primaryStage.setTitle("Fibbonacci sequence Jack Oporto 2020");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -110,6 +112,8 @@ public class Main extends Application {
 	}
 	
 	//This returns back the milliseconds it took to perform the calculation
+	//If I figured this out sooner I'd have figured a way to consolidate these
+	//functions into one.
 	public static long getIterTime(long index) {
 		long startTime = System.nanoTime();
 		fibIterative(index);
