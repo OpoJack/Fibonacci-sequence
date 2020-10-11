@@ -3,7 +3,7 @@ package application;
 public class FibRuntime {
 	public static void main(String[] args) {
 		long startTime = System.nanoTime();
-		long result = fibRecursive(30);
+		long result = fibRecursive(3);
 		long endTime = System.nanoTime();
 		System.out.println("First trial got: " + result + " and " + (endTime - startTime) + " ms");
 		
